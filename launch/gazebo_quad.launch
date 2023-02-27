@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.0"/>
+  <param name="robot_description" command="cat $(find quad )/urdf/quad.urdf"/>
+
+<!--we resume the logic in empty_world.launch,changing -->
+<!--only the name of the world to be launched -->
+  <include
+    file="$(find gazebo_ros)/launch/willowgarage_world.launch"/>
+  <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 quad dummy 40" />
+<!--run a python script to the sned a service call to gazebo ros to spawn a urdf robot -->
+
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find quad)/urdf/quad.urdf -urdf -model quad"
+    output="screen" />
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+
+<!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find quad)/config/quad_control.yaml" command="load"/>
+  
+<!-- load the controller :here you state all the controllers that you defined in the yaml as active -->
+  <node name="controller_spawner"
+    pkg="controller_manager"
+    type="spawner"
+    respawn="false"
+    output="screen"
+    ns="/quad" 
+    args="joint_state_controller jointguide_position_controller jointbl_position_controller jointbr_position_controller jointfl_position_controller jointfr_position_controller"/>
+
+ <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher2" 
+        pkg="robot_state_publisher"
+        type="robot_state_publisher"
+	respawn="false" output="screen">
+  <remap from="/joint_states" to="/quad/joint_states" />
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" 
+      name="tf1_dummy_base" args="0 0 0 0 0 0 quad dummy 100" />
+  <node pkg="tf" type="static_transform_publisher" 
+      name="tf1_base_guide" args="0 0 0 0 0 0 quad guide 100" />
+  <node  name="tf_odom_base" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 quad hokuyo_link  100" />
+</launch>

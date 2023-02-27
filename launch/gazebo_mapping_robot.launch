@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<launch>
+ <arg name="x" default="0.0"/>
+ <arg name="y" default="0.0"/>
+ <arg name="z" default="0.0"/>
+ <arg name="base_frame" default="quad" />
+ <arg name="scan_topic" default="/scan" />
+ <param name="/use_sim_time" value="true" />
+ <param name ="base_frame" value="quad" />
+
+
+ <include
+     file="$(find quad_env)/launch/quad_world.launch"/>
+ <arg name="model"/>
+ <param name="robot_description" textfile="$(find quad)/urdf/quad.urdf" />
+
+ <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 quad dummy 40" /> 
+ <node pkg="tf" type="static_transform_publisher" 
+      name="tf1_dummy_base" args="0 0 0 0 0 0 quad dummy 100" />
+ <node pkg="tf" type="static_transform_publisher" 
+      name="tf1_base_guide" args="0.00051143 -0.43739 0.69906 0 0 0 quad guide 100" />
+ <node  name="tf_base_laserr" pkg="tf" type="static_transform_publisher" args="0 -0.432 0.96 0 0 0 quad hokuyo_link  100"/>
+ <node  name="tf_base_map" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 quad map  100"/>
+
+ <node
+    name="joint_state_publisher_gui"
+    pkg="joint_state_publisher_gui"
+    type="joint_state_publisher_gui" />
+ <!-- start robot state publisher -->
+ <node
+    pkg="robot_state_publisher"
+    type="robot_state_publisher"
+    name="robot_state_publisher"
+    output="screen">
+ <param name="publish_frequency"
+       type="double"
+       value="50.0"/>
+ </node>
+<!--run a python script to the sned a service call to gazebo ros to spawn a urdf robot -->
+
+ <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find quad)/urdf/quad.urdf -urdf -model quad"
+    output="screen" />
+ <node
+    name="rviz"
+    pkg="rviz"
+    type="rviz"
+  args="-d $(find quad)/launch/mapping.rviz"/>
+ <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+<!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find quad)/config/quad_control.yaml" command="load"/>
+  
+<!-- load the controller :here you state all the controllers that you defined in the yaml as active -->
+  <node name="controller_spawner"
+    pkg="controller_manager"
+    type="spawner"
+    respawn="false"
+    output="screen"
+    ns="/quad" 
+    args="joint_state_controller jointguide_position_controller jointbl_position_controller jointbr_position_controller jointfl_position_controller jointfr_position_controller"/>
+
+  
+ <!-- convert joint states to TF transforms for rviz, etc -->
+ <node name="robot_state_publisher2" 
+        pkg="robot_state_publisher"
+        type="robot_state_publisher"
+	respawn="false" output="screen">
+   <remap from="/joint_states" to="/quad/joint_states" />
+ </node>
+
+
+ 
+
+</launch>

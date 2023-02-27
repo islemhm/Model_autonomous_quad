@@ -1,0 +1,16 @@
+digraph G {
+"quad" -> "box"[label="Broadcaster: /robot_state_publisher2\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 0.856 sec old)\nBuffer length: 0.000 sec\n"];
+"odom" -> "quad"[label="Broadcaster: /gazebo\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 0.856 sec old)\nBuffer length: 0.000 sec\n"];
+"quad" -> "camera"[label="Broadcaster: /robot_state_publisher2\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 0.856 sec old)\nBuffer length: 0.000 sec\n"];
+"quad" -> "dummy"[label="Broadcaster: /tf_footprint_base\nAverage rate: 38.168 Hz\nMost recent transform: 0.906 ( -0.050 sec old)\nBuffer length: 0.131 sec\n"];
+"quad" -> "hokuyo_link"[label="Broadcaster: /tf_odom_base\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 0.856 sec old)\nBuffer length: 0.000 sec\n"];
+"quad" -> "guide"[label="Broadcaster: /gazebo\nAverage rate: 106.742 Hz\nMost recent transform: 0.907 ( -0.051 sec old)\nBuffer length: 0.178 sec\n"];
+"quad" -> "bl"[label="Broadcaster: /robot_state_publisher2\nAverage rate: 60.000 Hz\nMost recent transform: 0.838 ( 0.018 sec old)\nBuffer length: 0.100 sec\n"];
+"quad" -> "br"[label="Broadcaster: /robot_state_publisher2\nAverage rate: 60.000 Hz\nMost recent transform: 0.838 ( 0.018 sec old)\nBuffer length: 0.100 sec\n"];
+"guide" -> "fl"[label="Broadcaster: /robot_state_publisher2\nAverage rate: 60.000 Hz\nMost recent transform: 0.838 ( 0.018 sec old)\nBuffer length: 0.100 sec\n"];
+"guide" -> "fr"[label="Broadcaster: /robot_state_publisher2\nAverage rate: 60.000 Hz\nMost recent transform: 0.838 ( 0.018 sec old)\nBuffer length: 0.100 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 0.856"[ shape=plaintext ] ;
+ }->"odom";
+}

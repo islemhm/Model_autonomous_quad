@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+
+<robot name="quad">
+  <link name="dummy">   
+  </link>
+  <joint name="dummy_joint" type="fixed">
+     <parent link="dummy"/>
+     <child link="quad"/>
+  </joint>
+ 
+ <link name="quad">
+    <inertial>
+      <origin
+        xyz="-0.00169077501325609 -0.0532241180036688 0.332452114478226"
+        rpy="0 0 0" />
+      <mass
+        value="394.345706961892" />
+      <inertia
+        ixx="77.7977879380568"
+        ixy="-0.000902048893138492"
+        ixz="0.000135506707833061"
+        iyy="21.4865124263717"
+        iyz="-2.1459494527081"
+        izz="80.3010324861321" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/quad.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/quad.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link
+    name="guide">
+    <inertial>
+      <origin
+        xyz="-0.00070198 0.050465 -0.033725"
+        rpy="0 0 0" />
+
+      <mass
+        value="4.0577" />
+      <inertia
+        ixx="0.019717"
+        ixy="-0.0091948"
+        ixz="-0.00013978"
+        iyy="0.14293"
+        iyz="-0.0035166"
+        izz="0.14532" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/guide.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.89804 0.89804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/guide.STL" />
+      </geometry>
+    </collision>
+   </link>
+  <joint
+    name="guide"
+    type="revolute">
+    <origin
+      xyz="0.00051143 -0.43739 0.69906"
+      rpy="0 0 0" />
+    <parent
+      link="quad" />
+    <child
+      link="guide" />
+    <axis
+      xyz="-0.0028741 0 1" />
+<!-- it's a maximum effort  and velocity that that joint can apply et le degrée  this is how fast the joint will be able to go and how much effort will it allow the actuator to apply -->
+    <limit
+      lower="-0.523598776"
+      upper="0.523598776"
+      effort="20.0"
+      velocity="0" />
+  </joint>
+  <link
+    name="fl">
+  <inertial>
+    <origin
+     xyz="-0.037789 -0.00074873 -7.825E-06" rpy="0 0 0" />
+    <mass
+        value="39.866" />
+    <inertia
+        ixx="2.3211"
+        ixy="0.021002"
+        ixz="3.0895E-05"
+        iyy="1.2571"
+        iyz="9.9825E-06"
+        izz="1.2566" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/fl.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/fl.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fl"
+    type="continuous">
+    <origin
+      xyz="0.41026 -0.078315 -0.57816"
+      rpy="0 0 0" />
+    <parent
+      link="guide" />
+    <child
+      link="fl" />
+    <axis
+      xyz="-0.99981 -0.019731 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="30.0"
+      velocity="20.0" />
+  </joint>
+  <link
+    name="fr">
+    <inertial>
+      <origin
+        xyz="0.037685 0.0028976 6.4039E-06"
+        rpy="0 0 0" />
+      <mass
+        value="39.866" />
+      <inertia
+        ixx="2.3153"
+        ixy="0.081279"
+        ixz="1.2928E-05"
+        iyy="1.2629"
+        iyz="-2.9643E-05"
+        izz="1.2567" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/fr.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/fr.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fr"
+    type="continuous">
+    <origin
+      xyz="-0.41416 -0.10518 -0.56942"
+      rpy="0 0 0" />
+    <parent
+      link="guide" />
+    <child
+      link="fr" />
+    <axis
+      xyz="0.99707 0.076524 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="30.0"
+      velocity="20.0" />
+  </joint>
+  <link
+    name="br">
+    <inertial>
+      <origin
+        xyz="0.037796 1.3061E-06 -8.2896E-06"
+        rpy="0 0 0" />
+      <mass
+        value="39.866" />
+      <inertia
+        ixx="2.3215"
+        ixy="-9.9793E-06"
+        ixz="-3.017E-05"
+        iyy="1.2567"
+        iyz="-2.5146E-05"
+        izz="1.2566" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/br.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/br.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="br"
+    type="continuous">
+    <origin
+      xyz="-0.43333 0.72223 0.14067"
+      rpy="0 0 0" />
+    <parent
+      link="quad" />
+    <child
+      link="br" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="30.0"
+      velocity="20.0" />
+  </joint>
+  <link
+    name="bl">
+    <inertial>
+      <origin
+        xyz="-0.027796 -1.3061E-06 -8.2896E-06"
+        rpy="0 0 0" />
+      <mass
+        value="39.866" />
+      <inertia
+        ixx="2.3215"
+        ixy="-9.9793E-06"
+        ixz="3.017E-05"
+        iyy="1.2567"
+        iyz="2.5146E-05"
+        izz="1.2566" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/bl.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/bl.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="bl"
+    type="continuous">
+    <origin
+      xyz="0.41667 0.72223 0.14067"
+      rpy="0 0 0" />
+    <parent
+      link="quad" />
+    <child
+      link="bl" />
+    <axis
+      xyz="-1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="30.0"
+      velocity="20.0" />
+  </joint>
+  <link
+    name="box">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/box.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad/meshes/box.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="box"
+    type="fixed">
+    <origin
+      xyz="-0.12169 -0.11337 0.75231"
+      rpy="-0.36952 0 0" />
+    <parent
+      link="quad" />
+    <child
+      link="box" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+<!-- Camera  joint -->
+  
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 -0.432 0.919" rpy="0 0 -1.57"/>
+    <parent link="quad"/>
+    <child link="camera"/>
+  </joint>
+
+<link name="camera">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+  <!-- Hokuyo Laser joint -->
+  <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 -0.432 0.98" rpy="0 0 0"/>
+    <parent link="quad"/>
+    <child link="hokuyo_link"/>
+  </joint>
+  <!-- Hokuyo Laser -->
+  <link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://quad/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+
+
+<!-- plugins -->
+<!--  roues plugins -->
+<!-- add atransmission tag linked to the joint you want to move  -->
+<!-- this activates the gazebo control plugin for the quad namespace .this namespace will be set in the main spawm launch file ,Pour lier Gazebo et ROS, nous spécifions le plugin dans l'URDF -->
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <robotNamespace>/quad</robotNamespace>
+    <legacyModeNS>true</legacyModeNS>
+  </plugin>
+</gazebo>
+
+
+<!-- define the name of the transmission which will haveto be unique throught the urdf file  -->
+<transmission name ="tranguide">
+<!-- the type of transmission ,which for the moment only one is implemented " transmission_interface/SimpleTransmission"-->
+ <type> transmission_interface/SimpleTransmission</type>
+<!-- here you link the joint to the transmission and select the hardware interface ,which also has only effort interface that works-->
+<joint name="guide">
+<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+</joint>
+<!-- here you set a unique name for the actuator and again select the hardware interface  -->
+<actuator name="motor1">
+<hardwareInterface>EffortJointInterface</hardwareInterface>
+<mechanicalReduction>1</mechanicalReduction>
+</actuator>
+</transmission>
+
+<!-- add others transmisions of wheels-->
+<!-- wheel1-->
+<transmission name ="tranbl">
+<type> transmission_interface/SimpleTransmission</type>
+<joint name="bl">
+<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+</joint>
+<actuator name="motor2">
+<hardwareInterface>EffortJointInterface</hardwareInterface>
+<mechanicalReduction>1</mechanicalReduction>
+</actuator>
+</transmission>
+<!-- wheel2-->
+<transmission name ="tranbr">
+<type> transmission_interface/SimpleTransmission</type>
+<joint name="br">
+<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+</joint>
+<actuator name="motor3">
+<hardwareInterface>EffortJointInterface</hardwareInterface>
+<mechanicalReduction>1</mechanicalReduction>
+</actuator>
+</transmission>
+<!-- wheel3-->
+
+<transmission name ="tranfl">
+<type> transmission_interface/SimpleTransmission</type>
+<joint name="fl">
+<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+</joint>
+<actuator name="motor4">
+<hardwareInterface>EffortJointInterface</hardwareInterface>
+<mechanicalReduction>1</mechanicalReduction>
+</actuator>
+</transmission>
+
+<!-- wheel4-->
+<transmission name ="tranfr">
+<type> transmission_interface/SimpleTransmission</type>
+<joint name="fr">
+<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+</joint>
+<actuator name="motor5">
+<hardwareInterface>EffortJointInterface</hardwareInterface>
+<mechanicalReduction>1</mechanicalReduction>
+</actuator>
+</transmission>
+
+
+
+
+
+
+
+
+<gazebo>
+  <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+
+ <legacyMode>true</legacyMode>
+      <alwaysOn>true</alwaysOn>
+    <updateRate>100.0</updateRate>
+    <robotNamespace>/</robotNamespace>
+    <leftFrontJoint>fl</leftFrontJoint>
+    <rightFrontJoint>fr</rightFrontJoint>
+    <leftRearJoint>bl</leftRearJoint>
+    <rightRearJoint>br</rightRearJoint>
+    <wheelSeparation>1</wheelSeparation>
+    <wheelDiameter>0.5</wheelDiameter>
+    <robotBaseFrame>quad</robotBaseFrame>
+    <torque>30</torque>
+    <topicName>cmd_vel</topicName>
+    <broadcastTF>true</broadcastTF>
+<!--  🤔️-->
+    <odometryTopic>odom</odometryTopic>
+    <odometryFrame>odom</odometryFrame>
+    <publishTf>true</publishTf>
+    <wheelAcceleration>10</wheelAcceleration>
+    <odometrySource>world</odometrySource>
+    <publishOdomTF>true</publishOdomTF>
+    <covariance_yaw>0.010000</covariance_yaw>
+    <covariance_y>0.000100</covariance_y>
+    <covariance_x>0.000100</covariance_x>
+    <commandTopic>cmd_vel</commandTopic>
+  <!--  🤔️-->    
+ </plugin>
+</gazebo>
+<gazebo>
+<plugin name="omnni_steering" filename="libgazebo_ros_planar_move.so">
+    <commandTopic>cmd_vel</commandTopic>
+    <odometryTopic>odom</odometryTopic>
+    <odometryFrame>odom</odometryFrame>
+    <odometryRate>100.0</odometryRate>
+    <robotBaseFrame>quad</robotBaseFrame>
+    <publishTF>true</publishTF>
+    </plugin>
+</gazebo>
+
+
+<!-- hokuyo -->
+  <gazebo reference="hokuyo_link">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-2.87979</min_angle>
+            <max_angle>2.87979</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading. -->
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/scan</topicName>
+        <frameName>hokuyo_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+
+ <!-- camera -->
+  <!-- Le nom du lien "camera_link" doit correspondre au nom du lien que nous avons ajouté à l'URDF Xacro.
+-->
+
+  <gazebo reference="camera">
+  	 <!-- Le nom du capteur « camera1 » doit être unique par rapport à tous les autres noms de capteur. Le nom n'est pas utilisé à beaucoup d'endroits, sauf dans les plugins Gazebo auxquels vous pouvez accéder
+-->
+    <sensor type="camera" name="camera1">
+   <!-- Nombre de fois par seconde qu'une nouvelle image de caméra est prise dans Gazebo. Il s'agit du taux de mise à jour maximal que le capteur tentera pendant la simulation, mais il pourrait être inférieur à ce taux cible si la simulation physique s'exécute plus rapidement que la génération du capteur ne peut suivre.-->
+      
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+      	<!--ces valeurs pour correspondre aux spécifications du fabricant sur votre matériel de caméra physique. Une chose à noter est que les pixels sont supposés être carrés.-->
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>spcbot/camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+<gazebo reference="quad">
+      <material>
+        Gazebo/Grey
+      </material>
+  </gazebo> 
+<gazebo reference="fr">
+ 
+      <material>
+        Gazebo/Black
+      </material>
+  </gazebo> 
+<gazebo reference="fl">
+
+      <material>
+        Gazebo/Black
+      </material>
+  </gazebo> 
+<gazebo reference="br">
+   
+      <material>
+        Gazebo/Black
+      </material>
+  </gazebo> 
+<gazebo reference="bl">
+
+      <material>
+        Gazebo/Black
+      </material>
+  </gazebo> 
+<gazebo reference="camera">
+      <material>
+        Gazebo/Red
+      </material>
+  </gazebo> 
+<gazebo reference="box">
+      <material>
+        Gazebo/Black
+      </material>
+  </gazebo> 
+<gazebo reference="guide">
+      
+      <material>
+        Gazebo/Grey
+      </material>
+  </gazebo> 
+</robot>

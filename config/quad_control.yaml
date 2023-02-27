@@ -1,0 +1,30 @@
+quad:
+     #here you will set the publish rate of the joints position ,that now its controled by the joint_state_controller...
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  
+  # Position Controllers ---------------------------------------
+  jointguide_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: guide
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  jointbl_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: bl
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  jointbr_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: br
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  jointfl_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: fl
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  jointfr_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: fr
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+ 
+ #To add more just add them here as the first one --------------

@@ -1,0 +1,32 @@
+digraph G {
+node [shape=box];
+"dummy" [label="dummy"];
+"quad" [label="quad"];
+"bl" [label="bl"];
+"box" [label="box"];
+"br" [label="br"];
+"camera" [label="camera"];
+"guide" [label="guide"];
+"fl" [label="fl"];
+"fr" [label="fr"];
+"hokuyo_link" [label="hokuyo_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"dummy" -> "dummy_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"dummy_joint" -> "quad"
+"quad" -> "bl" [label="xyz: 0.41667 0.72223 0.14067 \nrpy: 0 -0 0"]
+"bl" -> "bl"
+"quad" -> "box" [label="xyz: -0.12169 -0.11337 0.75231 \nrpy: -0.36952 0 0"]
+"box" -> "box"
+"quad" -> "br" [label="xyz: -0.43333 0.72223 0.14067 \nrpy: 0 -0 0"]
+"br" -> "br"
+"quad" -> "camera_joint" [label="xyz: 0 -0.432 0.91 \nrpy: 0 0 -1.57"]
+"camera_joint" -> "camera"
+"quad" -> "guide" [label="xyz: 0.00051143 -0.43739 0.69906 \nrpy: 0 -0 0"]
+"guide" -> "guide"
+"guide" -> "fl" [label="xyz: 0.41026 -0.078315 -0.57816 \nrpy: 0 -0 0"]
+"fl" -> "fl"
+"guide" -> "fr" [label="xyz: -0.41416 -0.10518 -0.56942 \nrpy: 0 -0 0"]
+"fr" -> "fr"
+"quad" -> "hokuyo_joint" [label="xyz: 0 -0.432 0.96 \nrpy: 0 -0 0"]
+"hokuyo_joint" -> "hokuyo_link"
+}

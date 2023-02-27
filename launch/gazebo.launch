@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+  <param name="robot_description" command="cat $(find quad )/urdf/quad.urdf"/>
+ 
+
+<!--we resume the logic in empty_world.launch,changing -->
+<!--only the name of the world to be launched -->
+  <include  file="$(find gazebo_ros)/launch/empty_world.launch" /> 
+  <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 quad dummy 40" />
+ <!--run a python script to the sned a service call to gazebo ros to spawn a urdf robot -->
+
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find quad)/urdf/quad.urdf -urdf -model quad"
+    output="screen" />
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" />
+
+<!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find quad)/config/quad_control.yaml" command="load"/>
+  
+<!-- load the controller :here you state all the controllers that you defined in the yaml as active -->
+  <node name="controller_spawner"
+    pkg="controller_manager"
+    type="spawner"
+    respawn="false"
+    output="screen"
+    ns="/quad" 
+    args="joint_state_controller jointguide_position_controller jointbl_position_controller jointbr_position_controller jointfl_position_controller jointfr_position_controller"/>
+
+
+ <!-- convert joint states to TF transforms for rviz, etc 
+Ce package vous permet de publier l'état d'un robot dans tf. Une fois que l'état est publié, il est disponible pour tous les composants du système qui utilisent également tf . Le package prend en entrée les angles d'articulation du robot et publie les poses 3D des liens du robot-->
+  <node name="robot_state_publisher" 
+        pkg="robot_state_publisher"
+        type="robot_state_publisher"
+	respawn="false" output="screen">
+  
+
+  <remap from="/joint_states" to="different_joint_states"/>
+<!--or to ="/quad/joint_states" -->
+  </node>
+  <node pkg="tf" type="static_transform_publisher"  name="tf_dummy_quad" args="0 0 0 0 0 0 quad dummy 50" />
+  <node pkg="tf" type="static_transform_publisher" name="tf_quad_guide" args="0 0 0 0 0 0 quad guide 50" />
+  <node pkg="tf" type="static_transform_publisher" name="tf_dummy_guide" args="0 0 0 0 0 0 dummy guide 50" />
+  <node pkg="tf" type="static_transform_publisher" name="tf_base_map" args="0 0 0 0 0 0 quad map  50" />
+ 
+  
+  <node name="state_publisher" pkg="robot_setup_tf" type="state_publisher" />
+  <node pkg="robot_state_publisher"   
+        type="robot_state_publisher" name="rob_st_pub" >
+  <remap from="robot_description" to="robot_description" />
+  <remap from="joint_states" to="different_joint_states" />
+    </node>
+
+ 
+
+
+</launch>
