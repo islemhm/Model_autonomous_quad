@@ -5,7 +5,8 @@ project(quad)
 find_package(catkin REQUIRED)
 
 catkin_package()
-
+//test
+//test2
 find_package(roslaunch)
 
 foreach(dir config launch meshes urdf)
